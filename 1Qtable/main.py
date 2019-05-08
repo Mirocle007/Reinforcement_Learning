@@ -1,7 +1,7 @@
 """
 An example for RL using Qtable method.
-An agent "I" is on the random position of a one dimensional world, the target point is on the
-Right of the world.
+An agent "I" is on the random position of a one dimensional world, the target point is also on random
+position of the world.
 Run this program and see how the agent will find the target point.
 Referenced the tutorial of morvanzhou: https://morvanzhou.github.io/tutorials/
 """
@@ -37,25 +37,36 @@ def build_q_table(n_states, actions):
 class Env(object):
     def __init__(self, opt):
         self.opt = opt
+        self.terminal = random.randint(0, opt.n_states-1)
     
     def get_state(self):
         return self.state
 
     def reset(self):
-        self.state = random.randint(0, opt.n_states-2)
+        while True:
+            self.state = random.randint(0, opt.n_states-1)
+            if self.state != self.terminal:
+                break
         self.done = False
     
     def step(self, action):
         if action == 'right':    # move right
-            if self.state == self.opt.n_states - 2:   # terminate
+            if self.state == self.terminal - 1:   # terminate
                 self.state += 1
                 self.done = True
                 reward = 1
+            elif self.state == self.opt.n_states-1:  # reach the right wall
+                self.done = True
+                reward = -1
             else:
                 self.state += 1
                 reward = 0
         else:   # move left
-            if self.state == 0:
+            if self.state == self.terminal + 1:
+                self.state += 1
+                self.done = True
+                reward = 1
+            elif self.state == 0:
                 self.done = True  # reach the wall
                 reward = -1
             else:
@@ -64,7 +75,8 @@ class Env(object):
         return self.state, reward, self.done
 
     def render(self, episode, step_counter):
-        env_list = ["-"]*(self.opt.n_states-1) + ["T"]
+        env_list = ["-"]*(self.opt.n_states)
+        env_list[self.terminal] = "T"
         if self.done:
             interaction = "Episode {}: total_steps = {}".format(episode+1, step_counter)
             print("\r{}".format(interaction), end="")
@@ -75,7 +87,6 @@ class Env(object):
             interaction = "".join(env_list)
             print("\r{}".format(interaction), end="")
             time.sleep(opt.fresh_time)
-
 
     def choose_action(self, q_table):
         state_actions = q_table.iloc[self.state, :]
@@ -94,6 +105,7 @@ def train(env, opt):
         env.reset()
         env.render(episode, step_counter)
         while not env.done:
+            step_counter += 1
             pre_state = env.get_state()
             action = env.choose_action(q_table)
             state, reward, done = env.step(action)
@@ -105,7 +117,6 @@ def train(env, opt):
                 q_target = reward + opt.gamma * q_table.iloc[state, :].max()   # next state is not terminal
 
             q_table.loc[pre_state, action] += opt.alpha * (q_target - q_predict)  # update
-            step_counter += 1
     return q_table
 
 
