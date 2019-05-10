@@ -17244,3 +17244,57 @@ INFO: loading config from /etc/shadowsocks.json
 2019-05-10 14:37:47 INFO     connecting cello.client-channel.google.com:443 from 127.0.0.1:56910
 2019-05-10 14:37:53 INFO     connecting clients4.google.com:443 from 127.0.0.1:56914
 2019-05-10 14:37:53 INFO     connecting clients4.google.com:443 from 127.0.0.1:56918
+2019-05-10 14:38:04 WARNING  timed out: mtalk.google.com:5228
+2019-05-10 14:38:04 WARNING  timed out: cello.client-channel.google.com:443
+2019-05-10 14:38:04 WARNING  timed out: clients4.google.com:443
+2019-05-10 14:38:04 WARNING  timed out: clients4.google.com:443
+2019-05-10 14:38:04 INFO     connecting mtalk.google.com:5228 from 127.0.0.1:56926
+2019-05-10 14:38:04 INFO     connecting cello.client-channel.google.com:443 from 127.0.0.1:56930
+2019-05-10 14:38:07 INFO     connecting clients4.google.com:443 from 127.0.0.1:56934
+2019-05-10 14:38:18 WARNING  timed out: mtalk.google.com:5228
+2019-05-10 14:38:18 WARNING  timed out: cello.client-channel.google.com:443
+2019-05-10 14:38:18 WARNING  timed out: clients4.google.com:443
+2019-05-10 14:38:18 INFO     connecting mtalk.google.com:5228 from 127.0.0.1:56938
+2019-05-10 14:38:18 INFO     connecting cello.client-channel.google.com:443 from 127.0.0.1:56942
+2019-05-10 14:38:25 INFO     connecting clients4.google.com:443 from 127.0.0.1:56946
+2019-05-10 14:38:35 WARNING  timed out: mtalk.google.com:5228
+2019-05-10 14:38:35 WARNING  timed out: cello.client-channel.google.com:443
+2019-05-10 14:38:35 WARNING  timed out: clients4.google.com:443
+2019-05-10 14:38:35 INFO     connecting mtalk.google.com:5228 from 127.0.0.1:56952
+2019-05-10 14:38:35 INFO     connecting cello.client-channel.google.com:443 from 127.0.0.1:56956
+2019-05-10 14:38:35 INFO     connecting 13.229.188.59:443 from 127.0.0.1:56950
+2019-05-10 14:38:42 INFO     connecting clients4.google.com:443 from 127.0.0.1:56962
+2019-05-10 14:38:45 WARNING  timed out: mtalk.google.com:5228
+2019-05-10 14:38:45 WARNING  timed out: cello.client-channel.google.com:443
+2019-05-10 14:38:45 INFO     connecting cello.client-channel.google.com:443 from 127.0.0.1:56966
+2019-05-10 14:38:57 WARNING  timed out: clients4.google.com:443
+2019-05-10 14:38:57 WARNING  timed out: cello.client-channel.google.com:443
+2019-05-10 14:38:57 INFO     connecting cello.client-channel.google.com:443 from 127.0.0.1:56988
+2019-05-10 14:39:01 INFO     connecting clients4.google.com:443 from 127.0.0.1:56992
+2019-05-10 14:39:05 INFO     connecting clients1.google.com:443 from 127.0.0.1:57000
+2019-05-10 14:39:12 WARNING  timed out: cello.client-channel.google.com:443
+2019-05-10 14:39:12 WARNING  timed out: clients4.google.com:443
+2019-05-10 14:39:12 WARNING  timed out: clients1.google.com:443
+2019-05-10 14:39:12 INFO     connecting mtalk.google.com:5228 from 127.0.0.1:57006
+2019-05-10 14:39:12 INFO     connecting cello.client-channel.google.com:443 from 127.0.0.1:57010
+2019-05-10 14:39:13 INFO     connecting clients4.google.com:443 from 127.0.0.1:57014
+2019-05-10 14:39:13 INFO     connecting clients4.google.com:443 from 127.0.0.1:57018
+2019-05-10 14:39:25 WARNING  timed out: mtalk.google.com:5228
+2019-05-10 14:39:25 WARNING  timed out: cello.client-channel.google.com:443
+2019-05-10 14:39:25 WARNING  timed out: clients4.google.com:443
+2019-05-10 14:39:25 WARNING  timed out: clients4.google.com:443
+2019-05-10 14:39:25 INFO     connecting mtalk.google.com:5228 from 127.0.0.1:57028
+2019-05-10 14:39:25 INFO     connecting cello.client-channel.google.com:443 from 127.0.0.1:57032
+2019-05-10 14:39:26 INFO     connecting clients4.google.com:443 from 127.0.0.1:57036
+2019-05-10 14:39:40 WARNING  timed out: mtalk.google.com:5228
+2019-05-10 14:39:40 WARNING  timed out: cello.client-channel.google.com:443
+2019-05-10 14:39:40 WARNING  timed out: clients4.google.com:443
+2019-05-10 14:39:40 INFO     connecting mtalk.google.com:5228 from 127.0.0.1:57040
+2019-05-10 14:39:40 INFO     connecting cello.client-channel.google.com:443 from 127.0.0.1:57044
+2019-05-10 14:39:44 INFO     connecting play.google.com:443 from 127.0.0.1:57048
+2019-05-10 14:39:46 INFO     connecting clients4.google.com:443 from 127.0.0.1:57052
+2019-05-10 14:39:55 WARNING  timed out: cello.client-channel.google.com:443
+2019-05-10 14:39:55 WARNING  timed out: play.google.com:443
+2019-05-10 14:39:55 WARNING  timed out: clients4.google.com:443
+2019-05-10 14:39:55 INFO     connecting cello.client-channel.google.com:443 from 127.0.0.1:57056
+2019-05-10 14:39:56 INFO     connecting clients4.google.com:443 from 127.0.0.1:57060
