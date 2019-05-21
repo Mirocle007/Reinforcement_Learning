@@ -73,6 +73,7 @@ class Agent(object):
         self.replace_target_op = [tf.assign(t, p) for t, p in zip(tnet_params, pnet_params)]
         self.sess = tf.Session()
         self.sess.run(tf.global_variables_initializer())
+        self.saver = tf.train.Saver()
         if opt.output_graph:
             # $ tensorboard --logdir=logs
             tf.summary.FileWriter("logs/", self.sess.graph)
@@ -112,6 +113,9 @@ class Agent(object):
         # check to replace target net parameters
         if self.learn_step_counter % self.replace_target_iter == 0:
             self.sess.run(self.replace_target_op)
+        
+        if self.learn_step_counter % self.replace_target_iter * 100 == 0:
+            self.save()
         if self.memory_counter > self.memory_size:
             sample_index = np.random.choice(self.memory_size, self.batch_size)
         else:
@@ -150,5 +154,9 @@ class Agent(object):
         plt.show()
     
     def save(self):
-        # To do
-        pass
+        model_name = "./models/model_{}iter.ckpt".format(self.learn_step_counter)
+        save_path = self.saver.save(self.sess, model_name)
+        print("Model saved in path: {}".format(save_path))
+    
+    def closs_session(self):
+        self.sess.close()
