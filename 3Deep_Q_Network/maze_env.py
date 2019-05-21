@@ -46,7 +46,7 @@ class Maze(tk.Tk, object):
             for i in range(self.hole_num):
                 self.__setattr__("hole{}_center".format(i),
                                  [UNIT/2 + random.randint(0, self.maze_w - 1) * UNIT,
-                                    UNIT/2 + random.randint(0, self.maze_h - 1) * UNIT])
+                                  UNIT/2 + random.randint(0, self.maze_h - 1) * UNIT])
             self.oval_center = [UNIT/2 + random.randint(0, self.maze_w - 1) * UNIT,
                                 UNIT/2 + random.randint(0, self.maze_h - 1) * UNIT]
             self.sum_centers = [sum(self.__getattribute__("hole{}_center".format(i)))
@@ -126,15 +126,16 @@ class Maze(tk.Tk, object):
                                 self.oval_center[0] - self.oval_center[1]])):
                     break
         self.update()
-        time.sleep(self.fresh_time)
+        time.sleep(self.fresh_time*2)
         self.canvas.delete(self.rect)
         self.rect = self.canvas.create_rectangle(
             self.origin[0] - 15, self.origin[1] - 15,
             self.origin[0] + 15, self.origin[1] + 15,
             fill="red"
         )
-        # return observation
-        return self.canvas.coords(self.rect)
+        rect_coords = self.canvas.coords(self.rect)
+        observation = (np.array(rect_coords[:2]) - np.array(self.canvas.coords(self.oval)[:2]))/(self.maze_h * UNIT)
+        return observation
     
     def step(self, action):
         state = self.canvas.coords(self.rect)
@@ -177,8 +178,9 @@ class Maze(tk.Tk, object):
             reward = -1
             done = True
         else:
-            reward = 0
-        return state, reward, done
+            reward = -0.1
+        observation = (np.array(state[:2]) - np.array(self.canvas.coords(self.oval)[:2]))/(self.maze_h * UNIT)
+        return observation, reward, done
     
     def render(self):
         time.sleep(self.fresh_time)
@@ -200,7 +202,7 @@ def update():
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--fresh_time", dest="fresh_time", type=float, default=100, help="fresh time for one move")
+    parser.add_argument("--fresh_time", dest="fresh_time", type=float, default=0.1, help="fresh time for one move")
     parser.add_argument("--maze_h", dest="maze_h", type=int, default=8, help="the height of the maze(unit:unit)")
     parser.add_argument("--maze_w", dest="maze_w", type=int, default=8, help="the width of the maze(unit:unit)")
     parser.add_argument("--hole_num", dest="hole_num", type=int, choices=range(5), default=2, help="the number of holes")
