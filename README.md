@@ -30,3 +30,14 @@ To find other parameters, you can run the command:
 ```Shell
 $ python main.py --help
 ```
+
+## 3. 3Deep_Q_Network
+This directory is the same as 2Qtable_2d_env except that this agent uses a neural network(a simple two layer network).You can run main.py like this:
+```Shell
+python main.py --episodes 10000 --fresh_time 0.1 --hole_num 10 --lr 0.01 --output_graph t
+```
+
+To use tensorbord, you can run this in another terminal:
+```Shell
+tensorboard --logdir=logs
+```
