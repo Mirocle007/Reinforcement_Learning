@@ -18,7 +18,6 @@ def network(name, state, n_action, target_Q=None):
             tf.random_normal_initializer(0., 0.3),
             tf.constant_initializer(0.1) # config of layers
         )
-        print(c_names[0])
 
         # first layer.collections is used later when assign to target net
         with tf.variable_scope("l1"):
@@ -99,6 +98,7 @@ class Agent(object):
             action = np.argmax(actions)
         else:
             action = np.random.choice(self.actions)
+        action = int(action)
         return action
     
     def store(self, state, action, reward, next_action):

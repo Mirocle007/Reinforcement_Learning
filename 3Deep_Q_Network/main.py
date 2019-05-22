@@ -37,6 +37,8 @@ parser.add_argument("--batch_size", dest="batch_size", type=int,
                     default=32, help="batch_size")
 parser.add_argument("--output_graph", dest="output_graph", type=str2bool, 
                     default=False, help="output_graph")
+parser.add_argument("--play", dest="play", type=str2bool, 
+                    default=False, help="if play with the saved parameters")
 
 opt = parser.parse_args()
 
@@ -44,10 +46,11 @@ opt = parser.parse_args()
 def train():
     for episode in tqdm(range(opt.episodes)):
         state = env.reset()
+        env.render()
         while True:
-            env.render()
             action = agent.choose_action(state)
             next_state, reward, done = env.step(action)
+            env.render()
             agent.store(state, action, reward, next_state)
             agent.learn()
             state = next_state

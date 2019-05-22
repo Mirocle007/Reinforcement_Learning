@@ -23,7 +23,6 @@ UNIT = 40  # pixels
 
 
 def is_different(*numbers):
-    numbers = list(numbers)
     length = len(numbers)
     return len(set(numbers)) == length
 
@@ -42,7 +41,11 @@ class Maze(tk.Tk, object):
         self.origin_x = UNIT/2 + random.randint(0, self.maze_w - 1) * UNIT
         self.origin_y = UNIT/2 + random.randint(0, self.maze_h - 1) * UNIT
         self.origin = [self.origin_x, self.origin_y]
+        seed = 1  # 736
+        if opt.play:
+            seed = int(input("Please enter the seed: "))
         while True:
+            random.seed(seed)
             for i in range(self.hole_num):
                 self.__setattr__("hole{}_center".format(i),
                                  [UNIT/2 + random.randint(0, self.maze_w - 1) * UNIT,
@@ -51,22 +54,23 @@ class Maze(tk.Tk, object):
                                 UNIT/2 + random.randint(0, self.maze_h - 1) * UNIT]
             self.sum_centers = [sum(self.__getattribute__("hole{}_center".format(i)))
                                  for i in range(self.hole_num)]
+            if opt.play:
+                break
             if len(self.sum_centers) != self.hole_num:
                 continue
             self.sub_centers = [(self.__getattribute__("hole{}_center".format(i))[0] - 
                                  self.__getattribute__("hole{}_center".format(i))[1]) 
                                  for i in range(self.hole_num)]
             
-            
-            if is_different(self.sum_centers.extend([sum(self.origin), 
-                             sum(self.oval_center)])):
+            self.sum_centers.extend([sum(self.origin), sum(self.oval_center)])
+            if is_different(*self.sum_centers):
                 break
             else:
-                if is_different(self.sub_centers.extend([self.origin[0] - self.origin[1],
-                                self.oval_center[0] - self.oval_center[1]])):
+                self.sub_centers.extend([self.origin[0] - self.origin[1], self.oval_center[0] - self.oval_center[1]])
+                if is_different(*self.sub_centers):
                     break
-            print("continu")
-    
+            seed += 1
+        print("Remember the seed: {}".format(seed))
         self._build_maze()
 
     def _build_maze(self):
@@ -169,7 +173,6 @@ class Maze(tk.Tk, object):
         self.canvas.move(self.rect, base_action[0], base_action[1])  # move agent
 
         state = self.canvas.coords(self.rect)
-
         # reward function
         if state == self.canvas.coords(self.oval):
             reward = 1
@@ -178,7 +181,7 @@ class Maze(tk.Tk, object):
             reward = -1
             done = True
         else:
-            reward = -0.1
+            reward = 0
         observation = (np.array(state[:2]) - np.array(self.canvas.coords(self.oval)[:2]))/(self.maze_h * UNIT)
         return observation, reward, done
     
